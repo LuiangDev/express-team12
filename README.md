@@ -28,11 +28,11 @@ El equipo está compuesto por profesionales de distintos roles:
     </thead>
     <tbody>
       <tr>
-        <td><b>Nombre del project manager</b></td>
+        <td><b>Nombre</b></td>
         <td>Project manager </td>
       </tr>
       <tr>
-        <td><b>Nombre del UX/UI Designer</b></td>
+        <td><b>Nombre</b></td>
         <td>UX/UI Designer </td>
       </tr>
        <tr>
