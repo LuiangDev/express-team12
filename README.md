@@ -25,3 +25,7 @@ El equipo está compuesto por profesionales de distintos roles:
 - Project Management
 
 ---
+
+## 📄Descripción del proyecto:
+
+
