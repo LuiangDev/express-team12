@@ -40,7 +40,7 @@ El equipo está compuesto por profesionales de distintos roles:
         <td>Analista de datos (Data analyst) </td>
       </tr>
       <tr>
-        <td><b>Nombre</b></td>
+        <td><b>Maday Choque</b></td>
         <td>AI Engineer </td>
       </tr>
        <tr>
@@ -58,5 +58,3 @@ El equipo está compuesto por profesionales de distintos roles:
 ---
 
 ## 📄 Descripción del proyecto
-
-
