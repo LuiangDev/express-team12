@@ -28,11 +28,7 @@ El equipo está compuesto por profesionales de distintos roles:
     </thead>
     <tbody>
       <tr>
-        <td><b>Nombre</b></td>
-        <td>Project manager </td>
-      </tr>
-      <tr>
-        <td><b>Nombre</b></td>
+        <td><b>Sergio Perez</b></td>
         <td>UX/UI Designer </td>
       </tr>
        <tr>
@@ -44,11 +40,19 @@ El equipo está compuesto por profesionales de distintos roles:
         <td>AI Engineer </td>
       </tr>
        <tr>
-        <td><b>Nombre</b></td>
+        <td><b>Felipe Hernández Díaz de León</b></td>
+        <td>Frontend </td>
+      </tr>
+            <tr>
+        <td><b>Luis Angel Quispe Navarro</b></td>
         <td>Frontend </td>
       </tr>
       <tr>
-        <td><b>Nombre</b></td>
+        <td><b>Facundo Castro</b></td>
+        <td>Backend </td>
+      </tr>
+            <tr>
+        <td><b>Danny Mejía</b></td>
         <td>Backend </td>
       </tr>
     </tbody>
