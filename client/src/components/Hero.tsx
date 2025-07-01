@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import hero from "../assets/hero.png";
 
 export default function Hero() {
@@ -22,9 +23,12 @@ export default function Hero() {
         </div>
       </div>
       <div className=" text-center">
-        <button className="btn btn-primary mb-10  text-white font-semibold bg-gray-900 cursor-pointer px-8 py-3 rounded-full shadow-lg hover:scale-105 transition-transform">
+        <Link
+          to="/generate"
+          className="btn btn-primary mb-10 text-white font-semibold bg-gray-900 cursor-pointer px-8 py-3 rounded-full shadow-lg hover:scale-105 transition-transform inline-flex items-center justify-center"
+        >
           Generar Correo
-        </button>
+        </Link>
       </div>
     </section>
   );
