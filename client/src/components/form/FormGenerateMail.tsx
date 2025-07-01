@@ -55,7 +55,7 @@ export const FormGenerateMail = () => (
             Longitud del mensaje
           </option>
           <option value="pequeño">Pequeño (50 palabras)</option>
-          <option value="mediano">Mediano (100 palabras)</option>
+          <option value="medio">Mediano (100 palabras)</option>
           <option value="largo">Largo (150 palabras)</option>
         </Field>
         <ErrorMessage
