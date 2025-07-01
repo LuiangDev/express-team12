@@ -2,4 +2,5 @@
 export ENVIRONMENT=development
 
 # Execute FastAPI app
-py ./api/main.py
+cd "$(dirname "$0")/.."
+python api/main.py
