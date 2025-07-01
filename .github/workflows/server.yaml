@@ -1,0 +1,35 @@
+name: server
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'server/**'
+  pull_request:
+    branches: ['*']
+    paths:
+      - 'server/**'
+
+jobs:
+  server-testing:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with: 
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install packages
+        run: pip install --no-cache-dir -r requirements.dev.txt
+        working-directory: ./server
+      
+      - name: Tests E2E
+        run: pytest
+        working-directory: ./server
