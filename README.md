@@ -14,14 +14,51 @@ Construir un producto digital funcional, colaborativo e iterativo, que resuelva 
 
 ---
 
-## 🤝 Equipo de trabajo
+## 🤝👥 Integrantes
 
 El equipo está compuesto por profesionales de distintos roles:
-- Frontend
-- Backend
-- UX/UI Designer
-- AI Engineer
-- Data Analyst
-- Project Management
+
+<div align="left">
+  <table>
+    <thead>
+      <tr>
+        <th>Integrante</th>
+        <th>Rol</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>Sergio Perez</b></td>
+        <td>UX/UI Designer </td>
+      </tr>
+       <tr>
+        <td><b>Jesús Joaquín Cerón Melgoza</b></td>
+        <td>Analista de datos (Data analyst) </td>
+      </tr>
+      <tr>
+        <td><b>Maday Choque</b></td>
+        <td>AI Engineer </td>
+      </tr>
+       <tr>
+        <td><b>Felipe Hernández Díaz de León</b></td>
+        <td>Frontend </td>
+      </tr>
+            <tr>
+        <td><b>Luis Angel Quispe Navarro</b></td>
+        <td>Frontend </td>
+      </tr>
+      <tr>
+        <td><b>Facundo Castro</b></td>
+        <td>Backend </td>
+      </tr>
+            <tr>
+        <td><b>Danny Mejía</b></td>
+        <td>Backend </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 ---
+
+## 📄 Descripción del proyecto
