@@ -1,4 +1,5 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { generateMail } from "../../services/appServices";
 import { validationSchema } from "../../schemas/validationSchema";
 
 export const FormGenerateMail = () => (
@@ -10,9 +11,13 @@ export const FormGenerateMail = () => (
       message: "",
     }}
     validationSchema={validationSchema}
-    onSubmit={(values, { resetForm }) => {
-      console.log(values);
-      resetForm();
+    onSubmit={async (values, { resetForm }) => {
+      try {
+        await generateMail(values);
+        resetForm();
+      } catch (error) {
+        console.error("Error al generar el mail:", error);
+      }
     }}
   >
     {() => (
