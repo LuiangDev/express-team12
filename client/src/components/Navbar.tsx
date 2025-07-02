@@ -10,7 +10,7 @@ export default function Navbar() {
       </div>
       <div className="flex items-center mr-6">
         <Link
-          to="/login"
+          to="/"
           className="btn btn-outline btn-sm bg-gray-900 text-white px-8 py-2 rounded-2xl hover:bg-gray-800 transition-colors "
         >
           Login
@@ -19,7 +19,7 @@ export default function Navbar() {
 
       <div className="flex items-center">
         <Link
-          to="/register"
+          to="/"
           className="btn btn-outline btn-sm text-gray-900 px-6 py-2 rounded-2xl border-1 border-gray-900 hover:bg-gray-200 transition-colors"
         >
           Register
