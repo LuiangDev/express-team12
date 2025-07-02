@@ -1,21 +1,29 @@
-from fastapi import APIRouter, Body, status
-
-from models import email_models
+from fastapi import APIRouter, status
+from pydantic import BaseModel
+from dotenv import load_dotenv
+import os
+from api.services.welcome_email_service import WelcomeEmailService
 
 router = APIRouter(
   tags=['Email'],
   prefix='/email',
 )
 
-@router.get('')
-def hello():
-  return { "message": "Hello World!" }
+
+
+class UserData(BaseModel):
+    nombre: str
+    pais: str
+    intereses: str
+
+service = WelcomeEmailService()
+
 
 @router.post(
-  '/generate', 
-  summary="Generate an email", 
-  status_code=status.HTTP_201_CREATED,
-  response_model=email_models.EmailBase,
+    "/generate",
+    summary="Generate a personalized welcome email",
+    status_code=status.HTTP_201_CREATED,
 )
-def generate_email(body: email_models.CreateEmail = Body()):
-  return body
+def generar_bienvenida(user: UserData):
+    email = service.generar_email(user.nombre, user.pais, user.intereses)
+    return {"email": email}
