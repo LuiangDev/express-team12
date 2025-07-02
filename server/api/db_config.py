@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Depends
 from typing import Annotated
+from contextlib import asynccontextmanager
 from sqlmodel import create_engine, SQLModel, Session
 from dotenv import load_dotenv
 import os
@@ -10,7 +11,8 @@ DATABASE_URL = os.getenv("DATABASE_URL")
 
 engine = create_engine(DATABASE_URL)
 
-def create_db_and_tables(app: FastAPI):
+@asynccontextmanager
+async def create_db_and_tables(app: FastAPI):
   SQLModel.metadata.create_all(engine)
   yield
 
