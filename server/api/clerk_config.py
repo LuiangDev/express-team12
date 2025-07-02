@@ -15,6 +15,7 @@ def protected_route(request: Request):
     request,
     AuthenticateRequestOptions(authorized_parties=[FRONTEND_URL])
   )
+
   if not request_state.is_signed_in:
     raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Missing or invalid authorization header")
   
