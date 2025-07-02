@@ -4,13 +4,14 @@ import uvicorn
 from dotenv import load_dotenv
 import os
 
+from db_config import create_db_and_tables
 from routes import llm_route
 
 load_dotenv()
 
 FRONTEND_URL = os.getenv('FRONTEND_URL')
 
-app = FastAPI()
+app = FastAPI(lifespan=create_db_and_tables)
 
 app.add_middleware(
   CORSMiddleware,
