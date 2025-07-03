@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 import os
 
 from db_config import create_db_and_tables
-from routes import llm_route
+from routes import llm_route, profile_route
 
 load_dotenv()
 
@@ -21,7 +21,8 @@ app.add_middleware(
   allow_headers=["*"],
 )
 
-app.include_router(llm_route.router)
+app.include_router(llm_route)
+app.include_router(profile_route)
 
 if __name__ == "__main__":
   environment = os.getenv("ENVIRONMENT")
