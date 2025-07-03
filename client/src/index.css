@@ -1,2 +1,18 @@
 @import "tailwindcss";
 @plugin "daisyui";
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+:root {
+  --font-primary: "Inter", sans-serif;
+  --color-primary: #1a1d24;
+  --color-secondary: #00e0c6;
+  --color-tertiary: #3b82f6;
+  --color-quaternary: #9ca3af;
+  --color-quinary: #f2f2f2;
+}
+
+body {
+  background-color: var(--color-primary);
+  color: var(--color-quaternary);
+  font-family: var(--font-primary);
+}
