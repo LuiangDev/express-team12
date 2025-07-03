@@ -16,3 +16,11 @@ body {
   color: var(--color-quaternary);
   font-family: var(--font-primary);
 }
+
+.bg-gradient-custom {
+  background-image: linear-gradient(
+    to right,
+    var(--color-secondary),
+    var(--color-tertiary)
+  );
+}
