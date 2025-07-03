@@ -1,6 +1,7 @@
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import Footer from "../components/Footer";
+import Services from "../components/Services";
 
 export default function Home() {
   return (
@@ -9,6 +10,9 @@ export default function Home() {
         <Navbar />
         <div className="flex flex-1 items-center justify-center">
           <Hero />
+        </div>
+        <div className="flex flex-1 items-center justify-center">
+        <Services />
         </div>
       </div>
       <div className="w-full">
