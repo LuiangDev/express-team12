@@ -35,3 +35,22 @@ docker run --name project-container -p 3000:3000 --env-file ./.env express-proje
 ```
 docker logs project-container
 ```
+
+## 🐳 Levantar PostgreSQL con pgvector vía Docker
+
+Puedes iniciar una base de datos PostgreSQL lista para RAG (con la extensión pgvector) usando:
+
+```bash
+docker run --name pg-rag -e POSTGRES_PASSWORD=postgres -e POSTGRES_USER=postgres -e POSTGRES_DB=ragdb -p 5432:5432 -d ankane/pgvector
+```
+
+- Usuario: `postgres`
+- Contraseña: `postgres`
+- Base de datos: `ragdb`
+- Puerto local: `5432`
+
+Esto crea una instancia lista para usar con la extensión vectorial para IA y RAG.
+
+> Si necesitas conectarte desde la app, usa la cadena:
+> 
+> `postgresql://postgres:postgres@localhost:5432/ragdb`
