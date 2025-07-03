@@ -14,6 +14,7 @@
 body {
   background-color: var(--color-primary);
   color: var(--color-quaternary);
+  color: var(--color-quinary);
   font-family: var(--font-primary);
 }
 
@@ -24,3 +25,5 @@ body {
     var(--color-tertiary)
   );
 }
+
+
