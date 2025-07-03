@@ -1,11 +1,17 @@
 from fastapi import APIRouter, Body, status
+from fastapi.responses import StreamingResponse
 
-from models import email_models
+from models.email_models import CreateEmail
+from services.email_service import EmailService
+
+import io
 
 router = APIRouter(
   tags=['Email'],
   prefix='/email',
 )
+
+email_service = EmailService()
 
 @router.get('')
 def hello():
@@ -15,7 +21,8 @@ def hello():
   '/generate', 
   summary="Generate an email", 
   status_code=status.HTTP_201_CREATED,
-  response_model=email_models.EmailBase,
 )
-def generate_email(body: email_models.CreateEmail = Body()):
-  return body
+def generate_email(body: CreateEmail = Body()):
+  email = email_service.generate_email(body)
+  response = StreamingResponse(email)
+  return response

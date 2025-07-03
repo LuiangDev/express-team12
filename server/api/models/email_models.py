@@ -1,12 +1,12 @@
-from pydantic import BaseModel
 from enum import Enum as PyEnum
+from typing import Optional
 from sqlmodel import SQLModel, Field
 from sqlalchemy import Column, Enum, TIMESTAMP, Text, INT, VARCHAR
 from datetime import datetime, timezone
 from uuid import UUID as uuid
 
 class EmailLength(str, PyEnum):
-  SHORT = 'pequeño'
+  SHORT = 'corto'
   MEDIUM = 'medio'
   LONG = 'largo'
 
@@ -21,7 +21,8 @@ class ReceiverBase(SQLModel):
   age: int = Field(sa_column=Column(INT), description='The age of the receiver')
   country: str = Field(sa_column=Column(VARCHAR), description='Where the receiver come from')
   email: str = Field(sa_column=Column(VARCHAR), description='The email of the receiver')
-  ocçupation: str = Field(sa_column=Column(VARCHAR), description='Occupation of the receiver')
+  occupation: str = Field(sa_column=Column(VARCHAR), description='Occupation of the receiver')
+  interests: str = Field(sa_column=Column(VARCHAR), description='User interests')
 
 class IdModel(SQLModel):
   id: uuid = Field(default=None, primary_key=True)
@@ -32,10 +33,10 @@ class Timestamp(SQLModel):
 class Receiver(Timestamp, ReceiverBase, IdModel, table=True):
   __tablename__ = 'receivers'
 
-class CreateEmail(EmailBase):
+class CreateEmail(ReceiverBase, EmailBase):
   pass
 
 class Email(SQLModel, table=True):
   __tablename__ = 'emails'
-  id: uuid = Field(default=None, primary_key=True)
+  id: Optional[uuid] = Field(default=None, primary_key=True)
   message: str = Field(sa_column=Column(Text))
