@@ -1,5 +1,5 @@
-
-import logo from '../assets/logo2.png'; // Asegúrate de que la ruta sea correcta
+import logo from "../assets/logo2.png";
+import { FaLinkedinIn, FaFacebookF, FaWhatsapp } from "react-icons/fa";
 
 export default function Footer() {
   return (
@@ -17,14 +17,23 @@ export default function Footer() {
             Maily transforma tus ideas en correos profesionales con ayuda de IA.
           </p>
           <div className="flex gap-3">
-            <a href="#" className="btn btn-circle btn-lg bg-primary text-white hover:bg-gray-700">
-              in
+            <a
+              href="#"
+              className="btn btn-circle btn-md bg-primary text-[var(--color-quinary)] hover:bg-gray-900"
+            >
+              <FaLinkedinIn className="w-5 h-5" />
             </a>
-            <a href="#" className="btn btn-circle btn-lg bg-primary text-white hover:bg-gray-700">
-              f
+            <a
+              href="#"
+              className="btn btn-circle btn-md bg-primary text-[var(--color-quinary)] hover:bg-gray-900"
+            >
+              <FaFacebookF className="w-5 h-5" />
             </a>
-            <a href="#" className="btn btn-circle btn-lg bg-primary text-white hover:bg-gray-700">
-              wa
+            <a
+              href="#"
+              className="btn btn-circle btn-md bg-primary text-[var(--color-quinary)] hover:bg-gray-900"
+            >
+              <FaWhatsapp className="w-6 h-6" />
             </a>
           </div>
         </div>
@@ -34,24 +43,40 @@ export default function Footer() {
           <div className="text-base">
             <h3 className="font-semibold mb-4 text-base">Recursos</h3>
             <ul className="space-y-1">
-              <li><a href="#">Blog</a></li>
-              <li><a href="#">Preguntas frecuentes</a></li>
-              <li><a href="#">Guía de uso</a></li>
+              <li>
+                <a href="#">Blog</a>
+              </li>
+              <li>
+                <a href="#">Preguntas frecuentes</a>
+              </li>
+              <li>
+                <a href="#">Guía de uso</a>
+              </li>
             </ul>
           </div>
           <div className="text-base">
             <h3 className="font-semibold mb-4">Empresa</h3>
             <ul className="space-y-1">
-              <li><a href="#">Sobre nosotros</a></li>
-              <li><a href="#">Contacto</a></li>
-              <li><a href="#">Prensa</a></li>
+              <li>
+                <a href="#">Sobre nosotros</a>
+              </li>
+              <li>
+                <a href="#">Contacto</a>
+              </li>
+              <li>
+                <a href="#">Prensa</a>
+              </li>
             </ul>
           </div>
           <div className="text-base">
             <h3 className="font-semibold mb-4">Legal</h3>
             <ul className="space-y-1">
-              <li><a href="#">Términos de uso</a></li>
-              <li><a href="#">Política de privacidad</a></li>
+              <li>
+                <a href="#">Términos de uso</a>
+              </li>
+              <li>
+                <a href="#">Política de privacidad</a>
+              </li>
             </ul>
           </div>
         </div>
