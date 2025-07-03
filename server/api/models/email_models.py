@@ -1,9 +1,10 @@
 from enum import Enum as PyEnum
 from typing import Optional
 from sqlmodel import SQLModel, Field
-from sqlalchemy import Column, Enum, TIMESTAMP, Text, INT, VARCHAR
+from sqlalchemy import Column, Enum, TIMESTAMP, Text, INT, VARCHAR, UUID
+import sqlalchemy.dialects.postgresql as pg
 from datetime import datetime, timezone
-from uuid import UUID as uuid
+from uuid import UUID as uuid, uuid4
 
 class EmailLength(str, PyEnum):
   SHORT = 'corto'
@@ -25,7 +26,7 @@ class ReceiverBase(SQLModel):
   interests: str = Field(sa_column=Column(VARCHAR), description='User interests')
 
 class IdModel(SQLModel):
-  id: uuid = Field(default=None, primary_key=True)
+  id: Optional[uuid] = Field(sa_column=Column(pg.UUID(as_uuid=True), primary_key=True), default_factory=lambda: uuid4())
 
 class Timestamp(SQLModel):
   created_at: datetime = Field(sa_column=Column(TIMESTAMP), default_factory=lambda: datetime.now(timezone.utc))
@@ -38,5 +39,5 @@ class CreateEmail(ReceiverBase, EmailBase):
 
 class Email(SQLModel, table=True):
   __tablename__ = 'emails'
-  id: Optional[uuid] = Field(default=None, primary_key=True)
+  id: Optional[uuid] = Field(sa_column=Column(UUID, primary_key=True), default_factory=lambda: uuid4())
   message: str = Field(sa_column=Column(Text))

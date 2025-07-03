@@ -12,8 +12,8 @@ DATABASE_URL = os.getenv("DATABASE_URL")
 
 engine = create_engine(DATABASE_URL)
 try:
-    with engine.connect() as conn:
-        print("INFO : Successfully connected to the PostgreSQL database.", file=sys.stdout)
+  with engine.connect() as conn:
+    print("INFO : Successfully connected to the PostgreSQL database.", file=sys.stdout)
 except Exception as e:
     print(f"ERROR: Could not connect to the PostgreSQL database: {e}", file=sys.stderr)
 

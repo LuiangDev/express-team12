@@ -1,15 +1,16 @@
 from fastapi import APIRouter, HTTPException, status, Body, Depends
-from sqlmodel import Session, select
-from models.brand_metadata import Profile
+from sqlmodel import select
 from db_config import DatabaseDep
+from clerk_config import AuthDep
 import json
+
+from models.brand_metadata import Profile
+from models.user_models import Users
 
 router = APIRouter(
     tags=["Profile"],
     prefix="/profile",
 )
-
-
 
 @router.get(
     "",
@@ -17,8 +18,10 @@ router = APIRouter(
     summary="Obtener perfil de la PyME",
     description="Devuelve el perfil de la PyME si existe."
 )
-def get_profile(session: DatabaseDep):
-    profile = session.exec(select(Profile)).first()
+def get_profile(session: DatabaseDep, auth: AuthDep):
+    user_id = auth.payload['sub']
+    user_found = session.exec(select(Users).where(Users.user_id == user_id)).first()
+    profile = session.exec(select(Profile).where(Profile.user_id == user_found.id)).first()
     if not profile:
         raise HTTPException(status_code=404, detail="Profile not found")
     return profile
@@ -34,11 +37,15 @@ def get_profile(session: DatabaseDep):
 )
 def create_profile(
     session: DatabaseDep,
+    auth: AuthDep,
     body: dict = Body(...)
 ):
-    for key in ["products", "values", "faqs", "email_examples"]:
+    user_id = auth.payload['sub']
+    user_found = session.exec(select(Users).where(Users.user_id == user_id)).first()
+    for key in ["products", "values", "faqs", "email_examples", "user_id"]:
         if key in body:
             body[key] = json.dumps(body[key])
+    body["user_id"] = user_found.id
     profile = Profile(**body)
     session.add(profile)
     session.commit()
@@ -55,9 +62,12 @@ def create_profile(
 )
 def update_profile(
     session: DatabaseDep,
+    auth: AuthDep,
     body: dict = Body(...)
 ):
-    profile = session.exec(select(Profile)).first()
+    user_id = auth.payload['sub']
+    user_found = session.exec(select(Users).where(Users.user_id == user_id)).first()
+    profile = session.exec(select(Profile).where(Profile.user_id == user_found.id)).first()
     if not profile:
         raise HTTPException(status_code=404, detail="Profile not found")
     for key, value in body.items():
