@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import hero from "../assets/hero.png";
 
 export default function Hero() {
   return (
@@ -14,13 +13,7 @@ export default function Hero() {
             potencia tus ventas.
           </p>
         </div>
-        <div className="relative w-[400px] h-[460px] overflow-hidden">
-          <img
-            src={hero}
-            alt="Hero"
-            className="absolute top-0 mt-10 left-0 w-full h-full object-cover z-10"
-          />
-        </div>
+        <div className="relative w-[400px] h-[460px] overflow-hidden"></div>
       </div>
       <div className=" text-center">
         <Link
