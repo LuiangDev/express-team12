@@ -1,50 +1,42 @@
-from pydantic import BaseModel, Field
-from enum import Enum
+from enum import Enum as PyEnum
+from typing import Optional
+from sqlmodel import SQLModel, Field
+from sqlalchemy import Column, Enum, TIMESTAMP, Text, INT, VARCHAR
+from datetime import datetime, timezone
+from uuid import UUID as uuid
 
-class Tone(str, Enum):
-  FORMAL = "formal"
-  CASUAL = "casual"
-
-class EmailType(str, Enum):
-  WELCOME = "bienvenida"
-
-class EmailLength(str, Enum):
-  SHORT = 'pequeño'
+class EmailLength(str, PyEnum):
+  SHORT = 'corto'
   MEDIUM = 'medio'
   LONG = 'largo'
-  
 
-class EmailBase(BaseModel):
-  type: EmailType = Field(
-    description='The email type',
-    examples=[EmailType.WELCOME]    
-  )
-  tone: Tone = Field(
-    description='Set the tone of the email',
-    examples=[Tone.FORMAL]
-  )
-  length: EmailLength = Field(
-    description='How long the email will be', 
-    examples=[EmailLength.SHORT]
-  )
-  message: str = Field(
-    description='The content that the email will communicate',
-  )
+class EmailBase(SQLModel):
+  type: str = Field(sa_column=Column(VARCHAR), description='The email type')
+  tone: str = Field(sa_column=Column(VARCHAR), description='Set the tone of the email')
+  length: EmailLength = Field(sa_column=Column(Enum(EmailLength)), description='How long the email will be')
+  message: str = Field(sa_column=Column(Text), description='The content that the email will communicate')
 
-class ReceiverBase(BaseModel):
-  name: str = Field(
-    description='The email type',
-    examples=['normal@email.com']    
-  )
-  age: int = Field(
-    description='The email type',
-    examples=['normal@email.com']    
-  )
-  country: str = Field(
-    description='The email type',
-    examples=['normal@email.com']    
-  )
-  email: str
+class ReceiverBase(SQLModel):
+  name: str = Field(sa_column=Column(VARCHAR), description='The name of the receiver')
+  age: int = Field(sa_column=Column(INT), description='The age of the receiver')
+  country: str = Field(sa_column=Column(VARCHAR), description='Where the receiver come from')
+  email: str = Field(sa_column=Column(VARCHAR), description='The email of the receiver')
+  occupation: str = Field(sa_column=Column(VARCHAR), description='Occupation of the receiver')
+  interests: str = Field(sa_column=Column(VARCHAR), description='User interests')
 
-class CreateEmail(EmailBase):
+class IdModel(SQLModel):
+  id: uuid = Field(default=None, primary_key=True)
+
+class Timestamp(SQLModel):
+  created_at: datetime = Field(sa_column=Column(TIMESTAMP), default_factory=lambda: datetime.now(timezone.utc))
+
+class Receiver(Timestamp, ReceiverBase, IdModel, table=True):
+  __tablename__ = 'receivers'
+
+class CreateEmail(ReceiverBase, EmailBase):
   pass
+
+class Email(SQLModel, table=True):
+  __tablename__ = 'emails'
+  id: Optional[uuid] = Field(default=None, primary_key=True)
+  message: str = Field(sa_column=Column(Text))
