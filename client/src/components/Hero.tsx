@@ -3,6 +3,7 @@ import { IoSparkles } from "react-icons/io5";
 import user1 from "../assets/user1.jpg";
 import user2 from "../assets/user2.jpg";
 import user3 from "../assets/user3.jpg";
+import { Link } from "react-router-dom";
 
 export default function Hero() {
   return (
@@ -35,13 +36,13 @@ export default function Hero() {
 
         {/* Botón de acción */}
         <div className="mt-12">
-          <a
-            href="#"
+          <Link
+            to="/generate"
             className="inline-flex items-center justify-center bg-white text-primary text-base font-bold px-6 py-3 rounded-full hover:opacity-90 transition"
           >
             15 días gratuitos{" "}
             <HiOutlineArrowNarrowRight className="ml-2 text-2xl" />
-          </a>
+          </Link>
         </div>
 
         {/* Avatares + confianza */}
