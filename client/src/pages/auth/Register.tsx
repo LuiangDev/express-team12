@@ -24,11 +24,13 @@ export const Register = () => {
     <div className="min-h-screen bg-primary flex flex-col items-center justify-center relative px-4">
       {/* Logo superior izquierdo */}
       <div className="absolute top-4 left-6 ">
+        <Link to="/" className="">
         <img
           src={logo1}
           alt="Maily1 Logo"
           className="w-[99px] object-contain"
         />
+        </Link>
       </div>
       <div className="min-h-screen bg-primary flex flex-col items-center justify-center relative px-4 my-10">
         {/* Card de Register */}
