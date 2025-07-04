@@ -4,6 +4,7 @@ import Footer from "../components/Footer";
 import Services from "../components/Services";
 import Plans from "../components/Plans";
 import About from "../components/About";
+import FinalCTA from "../components/FinalCTA";
 
 export default function Home() {
   return (
@@ -21,6 +22,9 @@ export default function Home() {
         </div>
         <div className="flex flex-1 items-center justify-center">
           <About />
+        </div>
+        <div className="flex flex-1 items-center justify-center">
+          <FinalCTA />
         </div>
       </div>
       <div className="w-full">
