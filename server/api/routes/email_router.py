@@ -4,12 +4,7 @@ from typing import Annotated, List
 
 # Importaciones de modelos y servicios
 from services.email_service import EmailService
-from models.email_models import (
-    EmailType,
-    WelcomeEmailData,
-    PromotionEmailData,
-    SupportReplyEmailData # Asumiendo que has añadido este modelo
-)
+from models.email_validation_models import EmailType, WelcomeEmailData, PromotionEmailData, SupportReplyEmailData
 
 # Definimos etiquetas para agrupar endpoints en la UI de Swagger
 router = APIRouter(
@@ -24,6 +19,7 @@ def get_email_service():
 EmailServiceDep = Annotated[EmailService, Depends(get_email_service)]
 
 # --- Modelo para la respuesta de email ---
+from pydantic import BaseModel
 class EmailResponse(BaseModel):
     email_content: str
 

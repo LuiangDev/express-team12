@@ -1,3 +1,3 @@
 
 from .email_models import *
-from .brand_metadata import *
+from .profile_models import *

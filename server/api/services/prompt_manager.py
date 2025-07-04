@@ -1,46 +1,90 @@
 # services/prompt_manager.py
 from langchain.prompts import PromptTemplate
-from models.email_models import EmailType
+from models.email_validation_models import EmailType
 
-# --- PROMPT PARA EMAIL DE BIENVENIDA ---
-WELCOME_PROMPT_TEMPLATE = (
-    "Eres un asistente que redacta emails corporativos.\n\n"
-    "Contexto de la empresa extraído semánticamente:\n{contexto}\n\n"
-    "Redacta un email de bienvenida {length} y {tone} para un nuevo usuario llamado {name} que es de {country} con la ocupación {occupation} y tiene estos intereses: {interests}. "
-    "Si se proporciona un mensaje adicional, inclúyelo: {message}. Si no, ignóralo. "
-    "El email debe terminar invitando al usuario a explorar la plataforma."
-)
+# =========================================================================
+#  NUEVO PROMPT DE BIENVENIDA (MUCHO MÁS EXPLÍCITO)
+# =========================================================================
+WELCOME_PROMPT_TEMPLATE = """
+### TAREA ###
+Tu única tarea es generar el texto completo y listo para enviar de un email corporativo de bienvenida.
+NO uses placeholders como [Nombre], [Empresa], etc. Utiliza la información proporcionada para rellenar todos los detalles.
+El resultado final debe ser únicamente el cuerpo y asunto del email, sin notas, comentarios o texto introductorio.
+
+### CONTEXTO DE LA EMPRESA (Extraído semánticamente) ###
+{contexto}
+
+### DATOS DEL EMAIL Y DEL DESTINATARIO ###
+- Tono del email: {tone}
+- Longitud del email: {length}
+- Nombre del destinatario: {name}
+- País del destinatario: {country}
+- Ocupación del destinatario: {occupation}
+- Intereses del destinatario: {interests}
+
+### MENSAJE ADICIONAL OBLIGATORIO ###
+{message}
+(Si el mensaje anterior está vacío o dice 'None', ignora este punto por completo. No escribas nada sobre él).
+
+### INSTRUCCIONES FINALES ###
+1. Redacta el email usando el tono y la longitud especificados.
+2. Personaliza el contenido usando los datos del destinatario y el contexto de la empresa.
+3. Integra de forma natural el "Mensaje Adicional Obligatorio" si existe.
+4. Concluye siempre el email invitando al usuario a explorar la plataforma.
+5. El email debe empezar con "Asunto: [Asunto del email]".
+
+### EMAIL GENERADO ###
+"""
 
 WELCOME_PROMPT = PromptTemplate(
     input_variables=["length", "tone", "name", "country", "occupation", "interests", "message", "contexto"],
     template=WELCOME_PROMPT_TEMPLATE
 )
 
-# --- PROMPT PARA EMAIL DE PROMOCIÓN ---
-PROMOTION_PROMPT_TEMPLATE = (
-    "Eres un asistente de marketing experto en redacción de emails promocionales.\n\n"
-    "Contexto de la empresa y productos:\n{contexto}\n\n"
-    "Redacta un email de promoción {length} y {tone} para {user_name}. "
-    "El objetivo es promocionar nuestro producto: '{product_name}' con un descuento especial del {discount}. "
-    "Incluye el siguiente mensaje si se proporciona: {message}. "
-    "El email debe ser persuasivo y terminar con una clara llamada a la acción."
-)
+# ... (puedes aplicar la misma estructura a tus otros prompts como el de promoción) ...
+
+PROMOTION_PROMPT_TEMPLATE = """
+### TAREA ###
+Tu única tarea es generar el texto completo y listo para enviar de un email corporativo de promoción.
+NO uses placeholders. Utiliza la información proporcionada para rellenar todos los detalles.
+El resultado final debe ser únicamente el cuerpo y asunto del email, sin notas o comentarios.
+
+### CONTEXTO DE LA EMPRESA Y PRODUCTOS ###
+{contexto}
+
+### DATOS DEL EMAIL PROMOCIONAL ###
+- Tono del email: {tone}
+- Longitud del email: {length}
+- Nombre del destinatario: {user_name}
+- Producto a promocionar: {product_name}
+- Descuento ofrecido: {discount}
+
+### MENSAJE ADICIONAL OBLIGATORIO ###
+{message}
+(Si el mensaje anterior está vacío o dice 'None', ignóralo por completo).
+
+### INSTRUCCIONES FINALES ###
+1. Redacta un email persuasivo usando el tono y la longitud especificados.
+2. El objetivo es que el usuario aproveche la promoción del producto.
+3. Concluye siempre con una llamada a la acción clara.
+4. El email debe empezar con "Asunto: [Asunto del email]".
+
+### EMAIL GENERADO ###
+"""
 
 PROMOTION_PROMPT = PromptTemplate(
     input_variables=["length", "tone", "user_name", "product_name", "discount", "message", "contexto"],
     template=PROMOTION_PROMPT_TEMPLATE
 )
 
+
 # --- REGISTRO CENTRAL DE PROMPTS ---
-# Este diccionario mapea un EmailType a su PromptTemplate correspondiente.
 EMAIL_PROMPTS = {
     EmailType.WELCOME: WELCOME_PROMPT,
     EmailType.PROMOTION: PROMOTION_PROMPT,
-    # Añade aquí el prompt para EmailType.SUPPORT_REPLY cuando lo crees
 }
 
 def get_prompt(email_type: EmailType) -> PromptTemplate:
-    """Devuelve el PromptTemplate para un tipo de email dado."""
     prompt = EMAIL_PROMPTS.get(email_type)
     if not prompt:
         raise ValueError(f"No se encontró un prompt para el tipo de email: {email_type}")

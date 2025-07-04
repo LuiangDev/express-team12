@@ -5,13 +5,12 @@ import os
 from typing import List, Dict, Any
 from uuid import UUID
 from sqlmodel import Session, select
-from pgvector.sqlalchemy import cosine_distance
 
 # Importaciones de nuestros nuevos módulos
-from models.email_models import EmailType
+from models.email_validation_models import EmailType
 from services.prompt_manager import get_prompt
 from services.embedding_service import generate_embedding
-from api.db_config import engine
+from db_config import engine
 from models.embedding_models import EmbeddingsBase
 
 
@@ -87,10 +86,10 @@ class EmailService:
         # Construimos un statement que busca en todas las categorías deseadas a la vez.
         # Es más eficiente que hacer un bucle y múltiples queries.
         stmt = (
-            select(EmbeddingsBase.category, EmbeddingsBase.text, cosine_distance(EmbeddingsBase.embeddings, query_embedding).label("distance"))
+            select(EmbeddingsBase.category, EmbeddingsBase.text)
             .where(EmbeddingsBase.profile_id == profile_id)
-            .where(EmbeddingsBase.category.in_(categories)) # Usamos IN para buscar en la lista de categorías
-            .order_by("distance") # Ordenamos por la distancia coseno
+            .where(EmbeddingsBase.category.in_(categories))
+            .order_by(EmbeddingsBase.embeddings.cosine_distance(query_embedding))
             .limit(limit)
         )
         

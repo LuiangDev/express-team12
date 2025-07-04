@@ -5,7 +5,7 @@ from uuid import UUID
 from sqlmodel import Session, select
 from typing import List, Dict, Any
 
-from api.db_config import engine
+from db_config import engine
 from models.profile_models import Profile # Asumo que tu modelo se llama así
 from models.embedding_models import EmbeddingsBase
 from services.embedding_service import generate_embedding # Tu función existente
@@ -53,35 +53,25 @@ class ProfileEmbeddingService:
 
             # 4. Procesar campos de lista JSON
             for field_name in self.JSON_LIST_FIELDS:
-                json_string = getattr(profile, field_name)
-                if not json_string:
+                items = getattr(profile, field_name)
+                if not items or not isinstance(items, list):
                     continue
-                
-                try:
-                    items = json.loads(json_string)
-                    if not isinstance(items, list):
-                        continue # Ignorar si no es una lista
-
-                    for item_text in items:
-                        # Asumimos que la lista contiene strings.
-                        # Si contiene objetos (ej. FAQs con "pregunta" y "respuesta"),
-                        # necesitarías formatear el texto aquí.
-                        # Ejemplo para FAQs: text_to_embed = f"P: {item['pregunta']} R: {item['respuesta']}"
-                        if not isinstance(item_text, str) or not item_text:
-                            continue
-
-                        embedding_vector = generate_embedding(item_text)
-                        new_embeddings.append(
-                            EmbeddingsBase(
-                                profile_id=profile_id,
-                                category=field_name, # La categoría es el nombre del campo (ej. "products")
-                                text=item_text,     # El texto es el elemento individual
-                                embeddings=embedding_vector
-                            )
+                for item_text in items:
+                    # Asumimos que la lista contiene strings.
+                    # Si contiene objetos (ej. FAQs con "pregunta" y "respuesta"),
+                    # necesitarías formatear el texto aquí.
+                    # Ejemplo para FAQs: text_to_embed = f"P: {item['pregunta']} R: {item['respuesta']}"
+                    if not isinstance(item_text, str) or not item_text:
+                        continue
+                    embedding_vector = generate_embedding(item_text)
+                    new_embeddings.append(
+                        EmbeddingsBase(
+                            profile_id=profile_id,
+                            category=field_name, # La categoría es el nombre del campo (ej. "products")
+                            text=item_text,     # El texto es el elemento individual
+                            embeddings=embedding_vector
                         )
-                except (json.JSONDecodeError, TypeError):
-                    # Manejar el caso de JSON mal formado o si el campo no es un string
-                    print(f"Advertencia: No se pudo procesar el campo JSON '{field_name}' para el perfil {profile_id}")
+                    )
 
             # 5. Guardar todos los nuevos embeddings en la base de datos
             session.add_all(new_embeddings)
