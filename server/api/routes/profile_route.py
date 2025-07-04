@@ -25,25 +25,39 @@ def create_or_replace_profile(
     session: DatabaseDep,
     background_tasks: BackgroundTasks,
 ):
-    # Dado que solo debe haber uno, este endpoint elimina el antiguo y crea uno nuevo.
-    # Esto simplifica la lógica y evita errores si se llama a POST más de una vez.
+    # --- Lógica para sobrescribir el perfil existente manteniendo la misma id ---
     old_profile = session.exec(select(Profile)).first()
     if old_profile:
-        session.delete(old_profile)
+        update_data = profile_data.model_dump(exclude_unset=True)
+        for key, value in update_data.items():
+            setattr(old_profile, key, value)
+        session.add(old_profile)
         session.commit()
-
-    # Pydantic/SQLModel se encarga de la conversión de listas a JSON si se configura en el modelo
-    new_profile = Profile.model_validate(profile_data)
-    
-    session.add(new_profile)
-    session.commit()
-    session.refresh(new_profile)
-
-    # Inicia la tarea pesada en segundo plano y responde inmediatamente
-    embedding_service = ProfileEmbeddingService()
-    background_tasks.add_task(embedding_service.sync_profile_embeddings, new_profile.id)
-
-    return new_profile
+        session.refresh(old_profile)
+        embedding_service = ProfileEmbeddingService()
+        background_tasks.add_task(embedding_service.sync_profile_embeddings, old_profile.id)
+        return old_profile
+    else:
+        # --- Lógica original: eliminar y crear uno nuevo (descomentar para usar con auth multiusuario) ---
+        # old_profile = session.exec(select(Profile)).first()
+        # if old_profile:
+        #     session.delete(old_profile)
+        #     session.commit()
+        # new_profile = Profile.model_validate(profile_data)
+        # session.add(new_profile)
+        # session.commit()
+        # session.refresh(new_profile)
+        # embedding_service = ProfileEmbeddingService()
+        # background_tasks.add_task(embedding_service.sync_profile_embeddings, new_profile.id)
+        # return new_profile
+        # -------------------------------------------------------------
+        new_profile = Profile.model_validate(profile_data)
+        session.add(new_profile)
+        session.commit()
+        session.refresh(new_profile)
+        embedding_service = ProfileEmbeddingService()
+        background_tasks.add_task(embedding_service.sync_profile_embeddings, new_profile.id)
+        return new_profile
 
 # --- Endpoint para actualizar ---
 @router.put(
