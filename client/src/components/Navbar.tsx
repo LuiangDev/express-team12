@@ -42,13 +42,13 @@ export default function Navbar() {
       {/* Botones de sesión */}
       <div className="flex gap-4 ml-28">
         <Link
-          to="/"
+          to="/login"
           className="text-base font-semibold hover:text-secondary px-6 py-2 transition-colors"
         >
           Iniciar Sesión
         </Link>
         <Link
-          to="/"
+          to="/register"
           className="text-base font-semibold px-6 py-2 rounded-full text-white bg-gradient-custom hover:opacity-90 transition"
         >
           Registrarse
