@@ -5,6 +5,7 @@ import { IoSparkles } from "react-icons/io5";
 import { FaCopy } from "react-icons/fa";
 import { MdCleaningServices } from "react-icons/md";
 import { useState } from "react";
+import { copyToClipboard } from "../../helpers/copyToCliboard";
 
 export interface Payload {
   age: number | null;
@@ -25,12 +26,6 @@ export const FormGenerateMail = () => {
   const handleReset = (resetForm: () => void) => {
     resetForm();
     setMailResponse(null);
-  };
-
-  const handleCopy = () => {
-    if (mailResponse) {
-      navigator.clipboard.writeText(mailResponse);
-    }
   };
 
   return (
@@ -260,7 +255,7 @@ export const FormGenerateMail = () => {
             <div className="flex justify-between items-center mt-10 mb-4 w-full max-w-xs mx-auto">
               <button
                 type="button"
-                onClick={handleCopy}
+                onClick={() => copyToClipboard(mailResponse || "")}
                 className="btn bg-gradient-custom text-white rounded-2xl px-8 flex items-center gap-2"
               >
                 <FaCopy className="ml-2" />
