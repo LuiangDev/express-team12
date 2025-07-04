@@ -1,6 +1,9 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { generateMail } from "../../services/appServices";
 import { validationSchema } from "../../schemas/validationSchema";
+import { IoSparkles } from "react-icons/io5";
+import { FaCopy } from "react-icons/fa";
+import { MdCleaningServices } from "react-icons/md";
 import { useState } from "react";
 
 export interface Payload {
@@ -22,6 +25,12 @@ export const FormGenerateMail = () => {
   const handleReset = (resetForm: () => void) => {
     resetForm();
     setMailResponse(null);
+  };
+
+  const handleCopy = () => {
+    if (mailResponse) {
+      navigator.clipboard.writeText(mailResponse);
+    }
   };
 
   return (
@@ -55,8 +64,8 @@ export const FormGenerateMail = () => {
       }}
     >
       {({ resetForm }) => (
-        <Form className="w-full max-w-4xl mx-auto bg-base-100 p-8 rounded-xl shadow-lg space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <Form className="w-full max-w-4xl mx-auto border-1 p-8 rounded-xl shadow-lg space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
             {/* Columna izquierda */}
             <div className="flex flex-col gap-4">
               <fieldset className="flex flex-col">
@@ -66,7 +75,7 @@ export const FormGenerateMail = () => {
                 <Field
                   type="text"
                   className="input input-bordered w-full"
-                  placeholder="Profesional"
+                  placeholder="Solicitud de información, seguimiento, etc."
                   name="type"
                 />
                 {/*   <p className="label">Indica la intención</p> */}
@@ -79,12 +88,12 @@ export const FormGenerateMail = () => {
 
               <fieldset className="flex flex-col">
                 <legend className="label-text font-semibold mb-1">
-                  Tono de email
+                  Tono del email
                 </legend>
                 <Field
                   type="text"
                   className="input input-bordered w-full"
-                  placeholder="Amigable y formal"
+                  placeholder="Formal, casual, técnico, etc."
                   name="tone"
                 />
                 {/*     <p className="label">Indica el tono (Tecnico, casual, etc)</p> */}
@@ -97,7 +106,7 @@ export const FormGenerateMail = () => {
 
               <fieldset className="flex flex-col">
                 <legend className="label-text font-semibold mb-1">
-                  Tamaño del Email
+                  Longitud del mensaje
                 </legend>
                 <Field
                   as="select"
@@ -105,7 +114,7 @@ export const FormGenerateMail = () => {
                   name="length"
                 >
                   <option disabled={true} value="pequeño">
-                    Selecciona tamaño
+                    Seleccionar tamaño
                   </option>
                   <option value="corto">Pequeño (50 palabras)</option>
                   <option value="medio">Mediano (100 palabras)</option>
@@ -125,7 +134,6 @@ export const FormGenerateMail = () => {
                 <Field
                   type="text"
                   className="input input-bordered w-full"
-                  placeholder="Juan Perez"
                   name="name"
                 />
                 <ErrorMessage
@@ -145,7 +153,7 @@ export const FormGenerateMail = () => {
                 <Field
                   type="number"
                   className="input input-bordered w-full"
-                  placeholder="23"
+                  placeholder="Ejemplo: 30"
                   name="age"
                 />
                 <ErrorMessage
@@ -162,7 +170,7 @@ export const FormGenerateMail = () => {
                 <Field
                   type="email"
                   className="input input-bordered w-full"
-                  placeholder="luis@example.com"
+                  placeholder="user@example.com"
                   name="email"
                 />
                 <ErrorMessage
@@ -179,7 +187,7 @@ export const FormGenerateMail = () => {
                 <Field
                   type="text"
                   className="input input-bordered w-full"
-                  placeholder="Frontend Developer"
+                  placeholder="Ejemplo: Frontend Developer"
                   name="occupation"
                 />
                 <ErrorMessage
@@ -196,7 +204,7 @@ export const FormGenerateMail = () => {
                 <Field
                   type="text"
                   className="input input-bordered w-full"
-                  placeholder="React"
+                  placeholder="Ejemplo: tecnología, deportes, música"
                   name="interests"
                 />
                 <ErrorMessage
@@ -232,7 +240,8 @@ export const FormGenerateMail = () => {
                 <div className="flex flex-col space-y-3 md:col-span-1">
                   <fieldset className="flex flex-col">
                     <legend className="label-text font-semibold mb-1">
-                      Respuesta del backend
+                      Correo generado. Puedes copiarlo, editarlo o ajustarlo
+                      según tus necesidades.
                     </legend>
                     <div
                       id="response"
@@ -247,27 +256,36 @@ export const FormGenerateMail = () => {
           </div>
 
           {/* Botón */}
-          <div className="text-center">
-            <button
-              className="btn btn-primary btn-wide flex items-center gap-2"
-              type="submit"
-              onClick={() => {
-                if (mailResponse) {
-                  handleReset(resetForm);
-                }
-              }}
-            >
-              {mailResponse ? (
-                <>
-                  Limpiar <span className="material-icons">refresh</span>
-                </>
-              ) : (
-                <>
-                  Generar <span className="material-icons">send</span>
-                </>
-              )}
-            </button>
-          </div>
+          {mailResponse ? (
+            <div className="flex justify-between items-center mt-10 mb-4 w-full max-w-xs mx-auto">
+              <button
+                type="button"
+                onClick={handleCopy}
+                className="btn bg-gradient-custom text-white rounded-2xl px-8 flex items-center gap-2"
+              >
+                <FaCopy className="ml-2" />
+                Copiar
+              </button>
+
+              <button
+                className="btn bg-[var(--color-quinary)] rounded-2xl text-primary btn-md px-8 flex items-center gap-2"
+                type="submit"
+                onClick={() => handleReset(resetForm)}
+              >
+                <MdCleaningServices className="ml-2 text-primary" />
+                Limpiar
+              </button>
+            </div>
+          ) : (
+            <div className="text-center mt-10 mb-4 flex justify-center">
+              <button
+                className="btn bg-[var(--color-quinary)] rounded-2xl text-primary btn-md px-8 flex items-center gap-2"
+                type="submit"
+              >
+                Generar <IoSparkles className="ml-2 text-primary" />
+              </button>
+            </div>
+          )}
         </Form>
       )}
     </Formik>
