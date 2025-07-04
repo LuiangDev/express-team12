@@ -5,7 +5,7 @@ from sqlmodel import SQLModel, Field, Relationship, Column, VARCHAR, TEXT, TIMES
 from pgvector.sqlalchemy import Vector
 
 if TYPE_CHECKING:
-  from .brand_metadata import Profile
+  from .profile_models import Profile
 
 class EmbeddingsBase(SQLModel,  table=True):
     __tablename__ = 'embeddings'
