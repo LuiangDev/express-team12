@@ -18,22 +18,33 @@ export default function Navbar() {
       {/* Menú de navegación */}
       <ul className="flex gap-6 text-base font-semibold">
         <li>
-          <Link to="/" className="hover:text-secondary">Inicio</Link>
+          <a href="#hero" className="hover:text-secondary">
+            Inicio
+          </a>
         </li>
         <li>
-          <Link to="/" className="hover:text-secondary">Servicios</Link>
+          <a href="#servicios" className="hover:text-secondary">
+            Servicios
+          </a>
         </li>
         <li>
-          <Link to="/" className="hover:text-secondary">Planes</Link>
+          <a href="#planes" className="hover:text-secondary">
+            Planes
+          </a>
         </li>
         <li>
-          <Link to="/" className="hover:text-secondary">Nosotros</Link>
+          <a href="#nosotros" className="hover:text-secondary">
+            Nosotros
+          </a>
         </li>
       </ul>
 
       {/* Botones de sesión */}
       <div className="flex gap-4 ml-28">
-        <Link to="/" className="text-base font-semibold hover:text-secondary px-6 py-2 transition-colors">
+        <Link
+          to="/"
+          className="text-base font-semibold hover:text-secondary px-6 py-2 transition-colors"
+        >
           Iniciar Sesión
         </Link>
         <Link
