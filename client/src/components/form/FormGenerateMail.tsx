@@ -66,7 +66,6 @@ export const FormGenerateMail = () => {
           const response = await generateWelcomeEmail(profileId, payload);
           setMailResponse(response.email_content);
 
-
           //   resetForm()
         } catch (error) {
           console.error("Error al generar el mail:", error);
@@ -223,7 +222,8 @@ export const FormGenerateMail = () => {
                   className="text-red-500 text-sm"
                 />
               </fieldset>
-
+            </div>
+            <div className="md:col-span-2">
               <fieldset className="flex flex-col">
                 <legend className="label-text font-semibold mb-1">
                   Intereses
