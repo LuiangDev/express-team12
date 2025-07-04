@@ -2,7 +2,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { generateMail } from "../../services/appServices";
 import { validationSchema } from "../../schemas/validationSchema";
 import { IoSparkles } from "react-icons/io5";
-import { FaCopy } from "react-icons/fa";
+import { FaCopy, FaSpinner } from "react-icons/fa";
 import { MdCleaningServices } from "react-icons/md";
 import { useState } from "react";
 
@@ -21,6 +21,7 @@ export interface Payload {
 
 export const FormGenerateMail = () => {
   const [mailResponse, setMailResponse] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleReset = (resetForm: () => void) => {
     resetForm();
@@ -50,6 +51,7 @@ export const FormGenerateMail = () => {
       validationSchema={validationSchema}
       onSubmit={async (values /* , { resetForm } */) => {
         try {
+          setIsLoading(true);
           const payload = {
             ...values,
             age: values.age ? Number(values.age) : null,
@@ -60,6 +62,8 @@ export const FormGenerateMail = () => {
           /*   resetForm(); */
         } catch (error) {
           console.error("Error al generar el mail:", error);
+        } finally {
+          setIsLoading(false);
         }
       }}
     >
@@ -279,10 +283,22 @@ export const FormGenerateMail = () => {
           ) : (
             <div className="text-center mt-10 mb-4 flex justify-center">
               <button
-                className="btn bg-[var(--color-quinary)] rounded-2xl text-primary btn-md px-8 flex items-center gap-2"
                 type="submit"
+                aria-disabled={isLoading}
+                className={`btn bg-[var(--color-quinary)] rounded-2xl text-primary btn-md px-8 flex items-center gap-2 ${
+                  isLoading ? "pointer-events-none opacity-100 cursor-wait" : ""
+                }`}
               >
-                Generar <IoSparkles className="ml-2 text-primary" />
+                {isLoading ? (
+                  <>
+                    Generando...
+                    <FaSpinner className="ml-2 text-primary animate-spin" />
+                  </>
+                ) : (
+                  <>
+                    Generar <IoSparkles className="ml-2 text-primary" />
+                  </>
+                )}
               </button>
             </div>
           )}
