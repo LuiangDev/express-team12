@@ -7,9 +7,9 @@ from models.email_validation_models import EmailType
 # =========================================================================
 WELCOME_PROMPT_TEMPLATE = """
 ### TAREA ###
-Tu única tarea es generar el texto completo y listo para enviar de un email corporativo de bienvenida.
+Tu única tarea es generar únicamente el cuerpo (body) de un email corporativo de bienvenida, listo para enviar.
 NO uses placeholders como [Nombre], [Empresa], etc. Utiliza la información proporcionada para rellenar todos los detalles.
-El resultado final debe ser únicamente el cuerpo y asunto del email, sin notas, comentarios o texto introductorio.
+El resultado final debe ser únicamente el body del email, sin asunto, notas, comentarios ni texto introductorio.
 
 ### CONTEXTO DE LA EMPRESA (Extraído semánticamente) ###
 {contexto}
@@ -31,7 +31,7 @@ El resultado final debe ser únicamente el cuerpo y asunto del email, sin notas,
 2. Personaliza el contenido usando los datos del destinatario y el contexto de la empresa.
 3. Integra de forma natural el "Mensaje Adicional Obligatorio" si existe.
 4. Concluye siempre el email invitando al usuario a explorar la plataforma.
-5. El email debe empezar con "Asunto: [Asunto del email]".
+5. El resultado debe ser solo el body del email, sin asunto ni encabezados.
 
 ### EMAIL GENERADO ###
 """
@@ -45,9 +45,9 @@ WELCOME_PROMPT = PromptTemplate(
 
 PROMOTION_PROMPT_TEMPLATE = """
 ### TAREA ###
-Tu única tarea es generar el texto completo y listo para enviar de un email corporativo de promoción.
+Tu única tarea es generar únicamente el cuerpo (body) de un email corporativo de promoción, listo para enviar.
 NO uses placeholders. Utiliza la información proporcionada para rellenar todos los detalles.
-El resultado final debe ser únicamente el cuerpo y asunto del email, sin notas o comentarios.
+El resultado final debe ser únicamente el body del email, sin asunto, notas, comentarios ni texto introductorio.
 
 ### CONTEXTO DE LA EMPRESA Y PRODUCTOS ###
 {contexto}
@@ -67,7 +67,7 @@ El resultado final debe ser únicamente el cuerpo y asunto del email, sin notas 
 1. Redacta un email persuasivo usando el tono y la longitud especificados.
 2. El objetivo es que el usuario aproveche la promoción del producto.
 3. Concluye siempre con una llamada a la acción clara.
-4. El email debe empezar con "Asunto: [Asunto del email]".
+4. El resultado debe ser solo el body del email, sin asunto ni encabezados.
 
 ### EMAIL GENERADO ###
 """
