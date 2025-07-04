@@ -110,7 +110,7 @@ Este MVP fue desarrollado en tan solo 5 días, bajo una metodología ágil, mult
     </tr>
     <tr>
       <td><b>Luis Angel Quispe Navarro</b></td>
-      <td>Frontend Developer</td>
+      <td>Frontend Developer & Design UX/UI</td>
     </tr>
     <tr>
       <td><b>Facundo Castro</b></td>
