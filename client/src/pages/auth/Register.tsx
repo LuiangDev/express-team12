@@ -4,8 +4,12 @@ import googleIcon from "../../assets/google.png";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
-export const Login = () => {
-  const [form, setForm] = useState({ email: "", password: "" });
+export const Register = () => {
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -13,21 +17,21 @@ export const Login = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Iniciar sesión con:", form);
+    console.log("Registrarse con:", form);
   };
 
   return (
     <div className="min-h-screen bg-primary flex flex-col items-center justify-center relative px-4">
       {/* Logo superior izquierdo */}
-      <div className="absolute top-4 left-6">
+      <div className="absolute top-4 left-6 ">
         <img
           src={logo1}
           alt="Maily1 Logo"
           className="w-[99px] object-contain"
         />
       </div>
-      <div className="min-h-screen flex flex-col items-center justify-center relative px-4">
-        {/* Card de Login */}
+      <div className="min-h-screen bg-primary flex flex-col items-center justify-center relative px-4 my-10">
+        {/* Card de Register */}
         <div className="bg-[var(--color-quinary)] rounded-3xl shadow-xl p-10 w-full max-w-md text-center space-y-6">
           <div>
             <div className="flex justify-center mb-4">
@@ -38,15 +42,34 @@ export const Login = () => {
               />
             </div>
             <h1 className="text-2xl font-bold text-primary">
-              Iniciar sesión en Maily
+              Comienza tu prueba gratis de 15 días
             </h1>
-            <p className="text-base font-medium text-primary/80  mt-1">
-              Ingresa y transforma ideas en correos efectivos.
+            <p className="text-base font-medium text-primary/80 mt-1">
+              Regístrate y comienza a generar correos con propósito.
             </p>
           </div>
 
           {/* Formulario */}
           <form className="space-y-4" onSubmit={handleSubmit}>
+            <div className="text-left">
+              <label
+                htmlFor="name"
+                className="text-base font-bold block mb-1 text-primary"
+              >
+                Nombre
+              </label>
+              <input
+                type="text"
+                name="name"
+                id="name"
+                value={form.name}
+                onChange={handleChange}
+                placeholder="Luis Angel"
+                className="input input-bordered text-primary text-base w-full bg-[var(--color-quinary)] rounded-lg border-[var(--color-quaternary)] focus:border-[var(--color-quaternary)] focus:ring-[var(--color-quaternary)]"
+                required
+              />
+            </div>
+
             <div className="text-left">
               <label
                 htmlFor="email"
@@ -80,7 +103,7 @@ export const Login = () => {
                 value={form.password}
                 onChange={handleChange}
                 placeholder="●●●●●●●●●●●"
-                className="input input-bordered text-primary tetx-lg w-full bg-[var(--color-quinary)] rounded-lg border-[var(--color-quaternary)] focus:border-[var(--color-quaternary)] focus:ring-[var(--color-quaternary)]"
+                className="input input-bordered text-primary text-base w-full bg-[var(--color-quinary)] rounded-lg border-[var(--color-quaternary)] focus:border-[var(--color-quaternary)] focus:ring-[var(--color-quaternary)]"
                 required
               />
             </div>
@@ -89,7 +112,7 @@ export const Login = () => {
               type="submit"
               className="btn bg-primary text-white rounded-lg w-full font-normal text-base tracking-wide"
             >
-              Iniciar sesión
+              Registrarse
             </button>
           </form>
 
@@ -100,19 +123,19 @@ export const Login = () => {
             <hr className="flex-grow border-gray-300" />
           </div>
 
-          {/* Google Login */}
+          {/* Google Register */}
           <button className="btn btn-outline text-primary/80 text-base font-normal w-full flex items-center justify-center gap-2 bg-[var(--color-quinary)] rounded-lg border-[var(--color-quaternary)] focus:border-[var(--color-quaternary)] focus:ring-[var(--color-quaternary)]">
             <img src={googleIcon} alt="Google" className="w-5 h-5" />
-            Iniciar sesión con Google
+            Registrarse con Google
           </button>
 
-          {/* Enlace a registro */}
+          {/* Enlace a Login */}
           <p className="text-sm text-gray-700">
             <Link
-              to="/register"
+              to="/login"
               className="underline font-bold text-base hover:text-primary"
             >
-              Crear una cuenta
+              Ya tengo una cuenta
             </Link>
           </p>
         </div>

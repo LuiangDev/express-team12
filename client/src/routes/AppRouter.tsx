@@ -3,6 +3,7 @@ import Home from "../pages/Home";
 import { FormMail } from "../pages/FormMail";
 import { FormProfilePage } from "../pages/FormProfilePage";
 import { Login } from "../pages/auth/Login";
+import { Register } from "../pages/auth/Register";
 
 export default function AppRouter() {
   return (
@@ -10,7 +11,7 @@ export default function AppRouter() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Home />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/generate" element={<FormMail />} />
         <Route path="/profile" element={<FormProfilePage />} />
       </Routes>
