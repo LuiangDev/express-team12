@@ -1,5 +1,5 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { generateMail } from "../../services/appServices";
+import { generateWelcomeEmail } from "../../services/appServices";
 import { validationSchema } from "../../schemas/validationSchema";
 import { IoSparkles } from "react-icons/io5";
 import { FaCopy, FaSpinner } from "react-icons/fa";
@@ -8,16 +8,13 @@ import { useState } from "react";
 import { copyToClipboard } from "../../helpers/copyToCliboard";
 
 export interface Payload {
-  age: number | null;
-  type: string;
   tone: string;
   length: string;
   message: string;
   name: string;
   country: string;
-  email: string;
   occupation: string;
-  interests: string;
+  interests: string[];
 }
 
 export const FormGenerateMail = () => {
@@ -48,13 +45,29 @@ export const FormGenerateMail = () => {
         try {
           setIsLoading(true);
           const payload = {
-            ...values,
-            age: values.age ? Number(values.age) : null,
+            tone: values.tone,
+            length: values.length,
+            message: values.message,
+            name: values.name,
+            country: values.country,
+            occupation: values.occupation,
+            interests: values.interests
+              .split(",")
+              .map((interest) => interest.trim())
+              .filter((i) => i !== ""),
           } as Payload;
 
-          const response = await generateMail(payload);
-          setMailResponse(response);
-          /*   resetForm(); */
+          const profileId = localStorage.getItem("profileId");
+
+          if (!profileId) {
+            throw new Error("No se encontró el ID del perfil en localStorage.");
+          }
+
+          const response = await generateWelcomeEmail(profileId, payload);
+          setMailResponse(response.email_content);
+
+
+          //   resetForm()
         } catch (error) {
           console.error("Error al generar el mail:", error);
         } finally {
@@ -191,6 +204,21 @@ export const FormGenerateMail = () => {
                 />
                 <ErrorMessage
                   name="occupation"
+                  component="div"
+                  className="text-red-500 text-sm"
+                />
+              </fieldset>
+
+              <fieldset className="flex flex-col">
+                <legend className="label-text font-semibold mb-1">País</legend>
+                <Field
+                  type="text"
+                  className="input input-bordered w-full"
+                  placeholder="Ejemplo: Perú"
+                  name="country"
+                />
+                <ErrorMessage
+                  name="country"
                   component="div"
                   className="text-red-500 text-sm"
                 />

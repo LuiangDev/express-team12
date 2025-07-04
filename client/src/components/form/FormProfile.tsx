@@ -7,10 +7,10 @@ export interface ProfilePayload {
   mission: string;
   tone: string;
   story: string;
-  products: string;
-  values: string;
-  faqs: string;
-  email_examples: string;
+  products: string[];
+  values: string[];
+  faqs: string[];
+  email_examples: string[];
 }
 
 export const FormProfile = () => {
@@ -28,17 +28,52 @@ export const FormProfile = () => {
       }}
       onSubmit={async (values) => {
         try {
-          console.log(values);
-          await createProfile(values);
-          Swal.fire({
-            icon: "success",
-            title: "Perfil creado exitosamente",
-            toast: true,
-            position: "top-end",
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-          });
+          const transformedPayload = {
+            ...values,
+            products: values.products
+              .split("\n")
+              .map((p) => p.trim())
+              .filter(Boolean),
+            values: values.values
+              .split("\n")
+              .map((v) => v.trim())
+              .filter(Boolean),
+            faqs: values.faqs
+              .split("\n")
+              .map((f) => f.trim())
+              .filter(Boolean),
+            email_examples: values.email_examples
+              .split("\n")
+              .map((e) => e.trim())
+              .filter(Boolean),
+          };
+
+          console.log("Payload transformado:", transformedPayload);
+
+          const response = await createProfile(transformedPayload);
+          console.log("Respuesta del backend:", response);
+
+          const profileId = response?.id;
+
+          if (profileId) {
+            localStorage.setItem("profileId", profileId);
+
+            Swal.fire({
+              icon: "success",
+              title: "Perfil creado exitosamente",
+              toast: true,
+              position: "top-end",
+              showConfirmButton: false,
+              timer: 3000,
+              timerProgressBar: true,
+            });
+          } else {
+            Swal.fire({
+              icon: "error",
+              title: "No se pudo guardar el ID del perfil",
+              text: "Verifica que la respuesta del backend incluya el campo 'id'.",
+            });
+          }
         } catch (error) {
           console.error("Error al crear el perfil:", error);
         }
