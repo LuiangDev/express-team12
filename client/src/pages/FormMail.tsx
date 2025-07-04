@@ -8,7 +8,7 @@ export const FormMail = () => {
       <div className="flex flex-col min-h-screen max-w-5xl mx-auto -mt-2">
         <Navbar />
 
-        <section className="text-center pt-6 pb-24 max-w-3xl mx-auto px-4">
+        <section className="text-center pt-36 pb-24 max-w-3xl mx-auto px-4">
           <h2 className="text-3xl md:text-5xl font-semibold">
             ¡Listo! Ahora genera <br />
             <span className="text-transparent bg-gradient-to-r from-[var(--color-secondary)] to-[var(--color-tertiary)] bg-clip-text">

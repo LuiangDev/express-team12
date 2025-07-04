@@ -1,6 +1,9 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { createProfile } from "../../services/appServices";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
+import { FaSpinner } from "react-icons/fa";
+import { useState } from "react";
 
 export interface ProfilePayload {
   name: string;
@@ -14,6 +17,9 @@ export interface ProfilePayload {
 }
 
 export const FormProfile = () => {
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+
   return (
     <Formik
       initialValues={{
@@ -27,6 +33,7 @@ export const FormProfile = () => {
         email_examples: "",
       }}
       onSubmit={async (values) => {
+        setIsLoading(true);
         try {
           const transformedPayload = {
             ...values,
@@ -67,6 +74,10 @@ export const FormProfile = () => {
               timer: 3000,
               timerProgressBar: true,
             });
+
+            setTimeout(() => {
+              navigate("/generate");
+            }, 1500);
           } else {
             Swal.fire({
               icon: "error",
@@ -76,11 +87,13 @@ export const FormProfile = () => {
           }
         } catch (error) {
           console.error("Error al crear el perfil:", error);
+        } finally {
+          setIsLoading(false);
         }
       }}
     >
       {() => (
-        <Form className="w-full max-w-4xl mx-auto border p-8 rounded-xl shadow-lg space-y-6">
+        <Form className="w-full max-w-4xl mx-auto border p-8 rounded-xl shadow-lg space-y-6 text-left">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <fieldset className="flex flex-col">
               <legend className="label-text font-semibold mb-1">Nombre</legend>
@@ -206,9 +219,18 @@ export const FormProfile = () => {
           <div className="text-center">
             <button
               type="submit"
-              className="btn bg-[var(--color-quinary)] rounded-2xl text-primary px-8"
+              disabled={isLoading}
+              className={`btn bg-[var(--color-quinary)] rounded-2xl text-primary px-8 flex items-center gap-2 mx-auto ${
+                isLoading ? "opacity-100 cursor-wait pointer-events-none" : ""
+              }`}
             >
-              Generar Perfil
+              {isLoading ? (
+                <>
+                  Generando perfil... <FaSpinner className="animate-spin" />
+                </>
+              ) : (
+                "Generar Perfil"
+              )}
             </button>
           </div>
         </Form>

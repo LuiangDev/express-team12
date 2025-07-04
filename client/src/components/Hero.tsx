@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 export default function Hero() {
   return (
-    <section className="relative text-[var(--color-quinary)] px-6 py-14 overflow-hidden">
+    <section className="relative text-[var(--color-quinary)] px-6 pb-14 pt-36 overflow-hidden">
       {/* Fondo difuminado */}
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-0 -mt-10">
         <div className="w-[300px] h-[300px] rounded-full blur-[50px] opacity-50 bg-gradient-custom" />

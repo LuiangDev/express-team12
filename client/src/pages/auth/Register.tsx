@@ -3,6 +3,8 @@ import logo3 from "../../assets/logo3.png";
 import googleIcon from "../../assets/google.png";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import Swal from "sweetalert2";
+
 
 export const Register = () => {
   const [form, setForm] = useState({
@@ -15,10 +17,36 @@ export const Register = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Registrarse con:", form);
-  };
+const handleSubmit = (e: React.FormEvent) => {
+  e.preventDefault();
+
+  const existingUser = localStorage.getItem("user");
+
+if (existingUser) {
+  Swal.fire({
+    icon: "warning",
+    title: "Usuario existente",
+    text: "Ya hay un usuario registrado en este navegador.",
+  });
+  return;
+}
+
+
+  localStorage.setItem("user", JSON.stringify(form));
+  localStorage.setItem("isLoggedIn", "true"); 
+Swal.fire({
+  icon: "success",
+  title: "¡Registro exitoso!",
+  text: "Bienvenido a Maily, estás logueado.",
+  showConfirmButton: false,
+  timer: 2000,
+  timerProgressBar: true,
+}).then(() => {
+  window.location.href = "/profile";
+});
+
+};
+
 
   return (
     <div className="min-h-screen bg-primary flex flex-col items-center justify-center relative px-4">

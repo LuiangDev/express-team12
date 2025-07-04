@@ -3,6 +3,7 @@ import logo3 from "../../assets/logo3.png";
 import googleIcon from "../../assets/google.png";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import Swal from "sweetalert2";
 
 export const Login = () => {
   const [form, setForm] = useState({ email: "", password: "" });
@@ -13,7 +14,42 @@ export const Login = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Iniciar sesión con:", form);
+
+    const storedUser = localStorage.getItem("user");
+
+    if (!storedUser) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "No hay ningún usuario registrado.",
+      });
+
+      return;
+    }
+
+    const user = JSON.parse(storedUser);
+
+    if (form.email === user.email && form.password === user.password) {
+      localStorage.setItem("isLoggedIn", "true");
+      Swal.fire({
+        icon: "success",
+        title: "¡Bienvenido!",
+        text: "Inicio de sesión exitoso.",
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 2500,
+        timerProgressBar: true,
+      });
+
+      window.location.href = "/generate";
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Acceso denegado",
+        text: "Credenciales incorrectas.",
+      });
+    }
   };
 
   return (
@@ -21,11 +57,11 @@ export const Login = () => {
       {/* Logo superior izquierdo */}
       <div className="absolute top-4 left-6">
         <Link to="/" className="">
-        <img
-          src={logo1}
-          alt="Maily1 Logo"
-          className="w-[99px] object-contain"
-        />
+          <img
+            src={logo1}
+            alt="Maily1 Logo"
+            className="w-[99px] object-contain"
+          />
         </Link>
       </div>
       <div className="min-h-screen flex flex-col items-center justify-center relative px-4">
