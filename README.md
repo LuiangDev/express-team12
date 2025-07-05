@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="img/portada.png" alt="Maily portada" />
+  <img src="data/mockup-home.png" alt="Maily portada" />
 </div>
 
 # ✉️ Maily | AI-Powered Email Generator – Team 12 | Proyectos Express
@@ -53,7 +53,7 @@ Crear un MVP funcional que automatice y personalice la redacción de correos ele
 ## 🎨 Diseño UX/UI
 
 <div align="center">
-  <img src="img/vistas.png" alt="mockup maily" />
+  <img src="data/mockup-vistas.png" alt="mockup maily" />
 </div>
 
 ---
