@@ -107,7 +107,7 @@ Este MVP fue desarrollado en tan solo 5 días, bajo una metodología ágil, mult
 
 <table align="center">
   <tr>
-    <td align="center">Luis Angel </td>
+    <td align="center">Luis Angel Quispe </td>
     <td align="center">Felipe Hernández </td>
     <td align="center">Facundo Castro </td>
     <td align="center">Danny Mejía </td>
