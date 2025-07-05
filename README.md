@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="data/mockup-home.png" alt="Maily portada" />
+  <img src="data/portada.png" alt="Maily portada" />
 </div>
 
 # ✉️ Maily | AI-Powered Email Generator – Team 12 | Proyectos Express
@@ -10,6 +10,10 @@
 **Maily** es una herramienta impulsada por inteligencia artificial que transforma ideas en correos listos para enviar. Está diseñada para ayudar a emprendedores y PyMEs a optimizar su comunicación de marketing outbound sin esfuerzo. Solo ingresa tu prompt, selecciona el tipo de email, tono y longitud, ¡y Maily se encarga del resto!
 
 ---
+
+<div align="center">
+<img src="data/mockup-home.png" alt="home" />
+</div>
 
 ## 🎯 Propósito del Proyecto
 
