@@ -98,40 +98,52 @@ Este MVP fue desarrollado en tan solo 5 días, bajo una metodología ágil, mult
 
 ---
 
-## 👥 Nuestro Equipo
+## 🤝 Nuestro Equipo
 
 <table align="center">
-  <thead>
-    <tr>
-      <th>Nombre</th>
-      <th>Rol</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-      <td><b>Luis Angel Quispe Navarro</b></td>
-      <td>Frontend Developer & Design UX/UI</td>
-    </tr>
-    <tr>
-      <td><b>Felipe Hernández Díaz de León</b></td>
-      <td>Frontend Developer</td>
-    </tr>
-    <tr>
-      <td><b>Facundo Castro</b></td>
-      <td>Backend Developer</td>
-    </tr>
-    <tr>
-      <td><b>Danny Mejía</b></td>
-      <td>Backend Developer</td>
-    </tr>
-  </tbody>
+  <tr>
+    <td align="center">Luis Angel </td>
+    <td align="center">Felipe Hernández </td>
+    <td align="center">Facundo Castro </td>
+    <td align="center">Danny Mejía </td>
+  </tr>
+  <tr>
+    <td align="center">Frontend Developer & UX/UI</td>
+    <td align="center">Frontend Developer</td>
+    <td align="center">Backend Developer</td>
+    <td align="center">Backend Developer</td>
+  </tr>
+  <tr>
+    <td align="center">
+      <a href="https://www.linkedin.com/in/luis-angel-quispe/">
+        <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://www.linkedin.com/in/fhdzleon/">
+        <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://www.linkedin.com/in/facundo-castro-87b864234/">
+        <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://www.linkedin.com/in/danny-mv/">
+        <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
+      </a>
+    </td>
+  </tr>
 </table>
+
+
 
 ---
 
 ## 🔗 Enlaces del Proyecto
 
-[![Sitio Web](https://img.shields.io/website?url=https%3A%2F%2Fmaily.vercel.app&style=for-the-badge)](https://maily.vercel.app)  [![Figma](https://img.shields.io/badge/Figma-Design-9C55F7?style=for-the-badge&logo=figma&logoColor=white)](https://www.figma.com/proto/gdj0FGvikAv0bhik6gLM76/Maily?page-id=3%3A5&node-id=8-214&viewport=-2262%2C194%2C0.51&t=kAdePU4qLJxXfMiz-1&scaling=scale-down-width&content-scaling=fixed)
+[![Sitio Web](https://img.shields.io/website?url=https%3A%2F%2Fmaily.vercel.app&style=for-the-badge)](https://maily-express.netlify.app/)  [![Figma](https://img.shields.io/badge/Figma-Design-9C55F7?style=for-the-badge&logo=figma&logoColor=white)](https://www.figma.com/proto/gdj0FGvikAv0bhik6gLM76/Maily?page-id=3%3A5&node-id=8-214&viewport=-2262%2C194%2C0.51&t=kAdePU4qLJxXfMiz-1&scaling=scale-down-width&content-scaling=fixed)
 
 ---
 
