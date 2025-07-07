@@ -4,8 +4,7 @@
 
 # ✉️ Maily | AI-Powered Email Generator – Team 12 | Proyectos Express
 
-**Ideas claras, correos efectivos.**  
-**Maily los genera por ti.**
+**Ideas claras, correos efectivos.**  **Maily los genera por ti.**
 
 **Maily** es una herramienta impulsada por inteligencia artificial que transforma ideas en correos listos para enviar. Está diseñada para ayudar a emprendedores y PyMEs a optimizar su comunicación de marketing outbound sin esfuerzo. Solo ingresa tu prompt, selecciona el tipo de email, tono y longitud, ¡y Maily se encarga del resto!
 
@@ -164,11 +163,5 @@ Maily nace para transformar la manera en que las PyMEs se comunican. Apostamos p
 
 > “Redactar nunca fue tan fácil... ni tan efectivo.”  
 > Con Maily, transformar ideas en correos profesionales es tan simple como llenar un formulario.
-
----
-
-## 📄 Licencia
-
-Este proyecto fue desarrollado con fines demostrativos y educativos como parte del programa **Proyectos Express** organizado por **No Country**.
 
 ---
